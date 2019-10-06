@@ -1,19 +1,26 @@
 - hosts: jenkins
-
+  become: yes
+  become_method: sudo
   vars:
-    jenkins_version: "2.190.1"
-    jenkins_url: http://jenkins.billklinefelter.com
+    jenkins_docker_image: "billklinefelter/jenkins-qt5"
+    jenkins_version: "latest"
+    jenkins_config_owner: "jenkins"
+    jenkins_config_group: "jenkins"
+    jenkins_url: http://127.0.0.1
     jenkins_port: 80
     jenkins_install_via: "docker"
-    jenkins_jobs:
-        - "Compile"
-        - "UnitTest"
-        - "SCA"
-        - "DeployToArtifactory"
-    jenkins_include_secrets: true
-    jenkins_include_custom_files: true
-    jenkins_custom_files:
-    jenkins_custom_plugins:
+    #jenkins_jobs:
+    jenkins_include_secrets: false
+    jenkins_include_custom_files: false
 
+  pre_tasks:
+    - name: Installing Docker Python support 
+      pip:
+        name: docker
+
+    - name: Installing SELinux Python support via yum 
+      yum:
+        name: python2-libselinux
+        state: present
   roles:
-    - emmetog.jenkins
+    - ansible-jenkins
