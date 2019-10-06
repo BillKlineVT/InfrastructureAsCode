@@ -12,6 +12,7 @@
     #jenkins_jobs:
     jenkins_include_secrets: false
     jenkins_include_custom_files: false
+    jenkins_java_opts: "-Djenkins.install.runSetupWizard=false -Dorg.apache.commons.jelly.tags.fmt.timeZone=America/Chicago"
 
   pre_tasks:
     - name: Installing Docker Python support 
