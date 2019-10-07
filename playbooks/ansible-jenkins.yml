@@ -7,9 +7,10 @@
     jenkins_config_owner: "jenkins"
     jenkins_config_group: "jenkins"
     jenkins_url: http://127.0.0.1
-    jenkins_port: 80
+    jenkins_port: 8080
     jenkins_install_via: "docker"
-    #jenkins_jobs:
+    jenkins_jobs:
+      - "Compile_myBrew"
     jenkins_include_secrets: false
     jenkins_include_custom_files: false
     jenkins_java_opts: "-Djenkins.install.runSetupWizard=false -Dorg.apache.commons.jelly.tags.fmt.timeZone=America/Chicago"
