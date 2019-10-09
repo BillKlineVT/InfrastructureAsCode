@@ -1,6 +1,12 @@
 - hosts: jenkins
   become: yes
   become_method: sudo
-
+  vars:
+    telegraf_agent_output:
+      - type: influxdb
+    config:
+      - urls = ["http://192.168.1.5:8086"]
+      - database = "telegraf"
+      - precision = "s"
   roles:
     - ansible-telegraf
